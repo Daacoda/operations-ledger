@@ -1,8 +1,266 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" class="light">
 <head>
-<title>Project 3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Scheduling System | project3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#b72301',
+                        'arch-bg': '#fcf9f8',
+                        'arch-surface': '#f6f3f2',
+                        'arch-elevated': '#eae7e7',
+                        'dark-bg': '#1c1b1b',
+                        'dark-surface': '#242323',
+                        'dark-elevated': '#2a2a2a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { @apply bg-arch-bg text-[#1c1b1b] dark:bg-dark-bg dark:text-arch-bg transition-colors duration-300; }
+        * { border-radius: 0 !important; box-shadow: none !important; }
+        
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease-out, transform 600ms ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .hero-line { opacity: 0; transform: translateY(20px); }
+        .hero-line.active { opacity: 1; transform: translateY(0); transition: opacity 600ms ease-out, transform 600ms ease-out; }
+
+        .hero-word { display: inline-block; transition: transform 200ms ease, color 200ms ease; cursor: default; }
+        .hero-word:hover { transform: translateY(-2px); color: #b72301; }
+
+        .system-card { @apply bg-arch-surface dark:bg-dark-surface transition-all duration-300; }
+        .system-card:hover { @apply bg-arch-elevated dark:bg-dark-elevated -translate-y-1; }
+
+        .btn-arch { @apply transition-transform duration-200; }
+        .btn-arch:hover { transform: translateY(-1px); }
+
+        .img-container img { transition: transform 800ms ease-out; }
+        .img-container:hover img { transform: scale(1.05) translateY(-2px); }
+    </style>
 </head>
-<body>
-<h1>Welcome to Project 3</h1>
+<body class="antialiased font-sans">
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-arch-bg/80 dark:bg-dark-bg/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
+            <div class="font-extrabold tracking-tighter text-lg">OPERATIONS/LOG</div>
+            <div class="flex items-center space-x-12 text-[10px] font-bold tracking-widest uppercase">
+                <a href="index.html" class="hover:text-primary transition-colors">Portfolio</a>
+                <a href="#" class="hover:text-primary transition-colors">Systems</a>
+                <button id="theme-toggle" class="p-2 hover:text-primary transition-colors">
+                    <svg id="sun-icon" class="hidden w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path></svg>
+                    <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+                <a href="#" class="text-primary">Get_Technical_Spec</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-40">
+        <!-- Hero -->
+        <section class="max-w-7xl mx-auto px-8 mb-40 grid grid-cols-12 gap-8 items-start">
+            <div class="col-span-12 md:col-span-7">
+                <div class="hero-line mb-6"><span class="bg-primary text-white px-3 py-1 text-[9px] font-bold tracking-widest uppercase">Workflow System</span></div>
+                <h1 id="hero-title" class="text-6xl md:text-8xl font-black tracking-tighter leading-[0.85] uppercase mb-12">
+                    <span class="hero-line block overflow-hidden">Content</span>
+                    <span class="hero-line block overflow-hidden">Scheduling</span>
+                    <span class="hero-line block overflow-hidden">System</span>
+                </h1>
+                <p class="hero-line text-xl text-[#1c1b1b]/60 dark:text-arch-bg/60 max-w-xl leading-relaxed">
+                    A structured content planning system for consistent publishing using async workflows.
+                </p>
+            </div>
+            <div class="col-span-12 md:col-span-5 reveal img-container overflow-hidden bg-arch-surface dark:bg-dark-surface">
+                <img src="assets/content-calendar.webp" alt="System Preview" class="w-full h-full object-cover grayscale opacity-80">
+            </div>
+        </section>
+
+        <!-- Problem -->
+        <section class="max-w-7xl mx-auto px-8 mb-40 grid grid-cols-12 gap-8">
+            <div class="col-span-12 md:col-span-4 reveal">
+                <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">The Problem</span>
+            </div>
+            <div class="col-span-12 md:col-span-8 reveal">
+                <h2 class="text-4xl font-extrabold tracking-tight leading-tight max-w-2xl">
+                    Inconsistent posting, lack of planning, and missed deadlines.
+                </h2>
+            </div>
+        </section>
+
+        <!-- Cards -->
+        <section class="max-w-7xl mx-auto px-8 mb-40 grid grid-cols-12 gap-1">
+            <div class="col-span-12 md:col-span-4 system-card p-12 reveal">
+                <div class="text-primary mb-8"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"></path></svg></div>
+                <h3 class="font-bold uppercase tracking-widest text-sm mb-6">Content Calendar</h3>
+                <p class="text-xs text-[#1c1b1b]/50 dark:text-arch-bg/50 leading-relaxed">Centralized Notion database for all cross-platform assets and release dates.</p>
+            </div>
+            <div class="col-span-12 md:col-span-4 system-card p-12 reveal">
+                <div class="text-primary mb-8"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg></div>
+                <h3 class="font-bold uppercase tracking-widest text-sm mb-6">Weekly Planning</h3>
+                <p class="text-xs text-[#1c1b1b]/50 dark:text-arch-bg/50 leading-relaxed">Structural framework for recurring weekly batches to ensure pipeline health.</p>
+            </div>
+            <div class="col-span-12 md:col-span-4 system-card p-12 reveal">
+                <div class="text-primary mb-8"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg></div>
+                <h3 class="font-bold uppercase tracking-widest text-sm mb-6">Status Tracking</h3>
+                <div class="space-y-2">
+                    <div class="flex items-center text-[10px] font-bold uppercase tracking-tighter opacity-30"><span></span>DRAFT</div>
+                    <div class="flex items-center text-[10px] font-bold uppercase tracking-tighter text-primary"><span></span>SCHEDULED</div>
+                    <div class="flex items-center text-[10px] font-bold uppercase tracking-tighter"><span></span>PUBLISHED</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow (Dark) -->
+        <section class="bg-[#111] text-white py-32 mb-40 overflow-hidden reveal">
+            <div class="max-w-7xl mx-auto px-8">
+                <span class="text-primary text-[9px] font-bold tracking-[0.2em] uppercase mb-20 block">Operational Workflow</span>
+                <div class="grid grid-cols-5 gap-4">
+                    <div class="space-y-4">
+                        <span class="text-[8px] font-bold opacity-30 uppercase block">01</span>
+                        <div class="text-sm font-bold uppercase tracking-widest">Idea</div>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-[8px] font-bold opacity-30 uppercase block">02</span>
+                        <div class="text-sm font-bold uppercase tracking-widest">Draft</div>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-[8px] font-bold opacity-30 uppercase block">03</span>
+                        <div class="text-sm font-bold uppercase tracking-widest">Review</div>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-[8px] font-bold opacity-30 uppercase block">04</span>
+                        <div class="text-sm font-bold uppercase tracking-widest">Schedule</div>
+                    </div>
+                    <div class="space-y-4 text-primary">
+                        <span class="text-[8px] font-bold opacity-30 uppercase block">05</span>
+                        <div class="text-sm font-bold uppercase tracking-widest">Publish</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics -->
+        <section class="max-w-7xl mx-auto px-8 mb-40 grid grid-cols-12 gap-8">
+            <div class="col-span-12 md:col-span-4 reveal">
+                <span class="text-[#1c1b1b]/30 dark:text-arch-bg/30 text-[9px] font-bold tracking-widest uppercase mb-12 block">Performance_Metrics</span>
+                <div class="bg-arch-surface dark:bg-dark-surface p-8 flex items-center gap-4 group cursor-default transition-colors hover:bg-arch-elevated dark:hover:bg-dark-elevated">
+                    <div class="w-8 h-8 bg-black/10 dark:bg-white/10 flex items-center justify-center font-bold text-[10px]">N</div>
+                    <span class="font-bold uppercase tracking-widest text-xs">Notion</span>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8 grid grid-cols-2 gap-px bg-arch-surface dark:bg-dark-surface">
+                <div class="bg-arch-bg dark:bg-dark-bg p-12 reveal border-l-4 border-primary transition-transform hover:-translate-y-1">
+                    <div class="text-5xl font-black tracking-tighter mb-2">3X</div>
+                    <div class="text-[9px] font-bold uppercase tracking-widest opacity-40">Consistent Posting / Week</div>
+                </div>
+                <div class="bg-arch-bg dark:bg-dark-bg p-12 reveal border-l-4 border-primary transition-transform hover:-translate-y-1">
+                    <div class="text-5xl font-black tracking-tighter mb-2">0</div>
+                    <div class="text-[9px] font-bold uppercase tracking-widest opacity-40">Missed Deadlines</div>
+                </div>
+                <div class="col-span-2 bg-arch-bg dark:bg-dark-bg p-12 reveal border-l-4 border-primary transition-transform hover:-translate-y-1">
+                    <div class="text-5xl font-black tracking-tighter mb-2">100%</div>
+                    <div class="text-[9px] font-bold uppercase tracking-widest opacity-40">Improved Workflow Clarity</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Takeaway -->
+        <section class="max-w-7xl mx-auto px-8 mb-40 reveal">
+            <div class="bg-arch-surface dark:bg-dark-surface p-24 text-center">
+                <span class="text-[#1c1b1b]/20 dark:text-arch-bg/20 text-[9px] font-bold tracking-[0.3em] uppercase mb-12 block">Core_Takeaway</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight italic">
+                    "Focus on consistency through structured planning."
+                </h2>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="max-w-7xl mx-auto px-8 mb-40 text-center reveal">
+            <a href="index.html" class="inline-flex items-center justify-center bg-primary text-white px-16 py-6 btn-arch group">
+                <span class="font-bold uppercase tracking-widest text-xs">Back to Portfolio</span>
+                <svg class="w-5 h-5 ml-4 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#111] text-white/30 py-12">
+        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center text-[9px] font-bold tracking-widest uppercase">
+            <div>©2024 ARCHITECTURAL LEDGER / OPS</div>
+            <div class="flex space-x-12 mt-8 md:mt-0">
+                <a href="#" class="hover:text-white transition-colors">Terminal</a>
+                <a href="#" class="hover:text-white transition-colors">Log_Out</a>
+                <a href="#" class="hover:text-white transition-colors">Documentation</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hero Animation
+        window.addEventListener('load', () => {
+            const lines = document.querySelectorAll('.hero-line');
+            lines.forEach((line, i) => {
+                setTimeout(() => {
+                    line.classList.add('active');
+                    if (line.tagName === 'SPAN') {
+                        const text = line.innerText;
+                        line.innerHTML = text.split('').map(char => `<span class="hero-word">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
+                    }
+                }, i * 120);
+            });
+        });
+
+        // Dark Mode
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function updateIcons() {
+            if (html.classList.contains('dark')) {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+        updateIcons();
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+            updateIcons();
+        });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
