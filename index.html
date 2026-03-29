@@ -1,8 +1,502 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aisha Bello | Operations Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'architectural-bg': '#fcfcfc',
+                        'architectural-red': '#b72301',
+                        'architectural-light': '#f6f3f2',
+                        'architectural-hover': '#eae7e7',
+                        'architectural-text': '#111111',
+                        'architectural-subtext': '#666666',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tight: ['Inter Tight', 'sans-serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles that cannot be easily done with Tailwind */
+        body {
+            background-color: #fcfcfc;
+            color: #111111;
+            overflow-x: hidden;
+        }
+
+        .no-radius {
+            border-radius: 0 !important;
+        }
+
+        /* Reveal animations classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 500ms ease-out, transform 500ms ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 500ms ease-out, transform 500ms ease-out, color 300ms ease, transform 300ms ease;
+            cursor: default;
+        }
+
+        .hero-word.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-word:hover {
+            color: #b72301;
+            transform: translateY(-2px);
+        }
+
+        .zoom-image {
+            transition: transform 800ms ease-out;
+            transform: scale(1);
+        }
+
+        .project-card:hover .zoom-image {
+            transform: scale(1.05) translateY(-2px);
+        }
+
+        .project-card:hover h3 {
+            color: #b72301;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            background-color: #f6f3f2;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Ensure zero-radius on all elements */
+        * {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 200ms;
+        }
+
+        .metric-card {
+            position: relative;
+            background-color: #f6f3f2;
+            padding: 2rem;
+            transition: background-color 300ms ease, transform 300ms ease;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #b72301;
+        }
+
+        .metric-card:hover {
+            background-color: #eae7e7;
+            transform: translateY(-2px);
+        }
+
+        .metric-card-white {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            transition: background-color 300ms ease, transform 300ms ease;
+        }
+
+        .metric-card-white::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #ffffff;
+        }
+
+        .metric-card-white:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .spec-block {
+            position: relative;
+            background-color: #f6f3f2;
+            padding: 2.5rem;
+            transition: background-color 300ms ease;
+        }
+
+        .spec-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #b72301;
+            opacity: 0.3;
+        }
+
+        .spec-block:hover {
+            background-color: #eae7e7;
+        }
+
+        .spec-block:hover::before {
+            opacity: 1;
+        }
+
+        .square-bullet {
+            width: 6px;
+            height: 6px;
+            background-color: #b72301;
+            display: inline-block;
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+
+        .tool-token {
+            background-color: #eae7e7;
+            padding: 4px 10px;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 300ms ease;
+            cursor: default;
+        }
+
+        .tool-token:hover {
+            background-color: #b72301;
+            color: #ffffff;
+        }
+
+        .timeline-guide {
+            position: relative;
+        }
+
+        .timeline-guide::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #eae7e7;
+        }
+
+        .timeline-marker {
+            width: 8px;
+            height: 8px;
+            background-color: #b72301;
+            position: absolute;
+            left: -4px;
+            top: 4px;
+        }
+
+        .log-item {
+            transition: transform 300ms ease;
+        }
+
+        .log-item:hover {
+            transform: translateX(4px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 60px;
+            background-color: #eae7e7;
+            overflow: hidden;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #b72301;
+            animation: scroll-anim 2s infinite;
+        }
+
+        @keyframes scroll-anim {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+    </style>
 </head>
-<body>
-<h1>Welcome to the Index Page</h1>
+<body class="font-sans antialiased">
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-sm border-b border-architectural-light">
+        <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="font-tight font-extrabold text-sm tracking-tighter uppercase">Operations_Ledger</div>
+            <div class="hidden md:flex space-x-12 text-[10px] font-bold tracking-widest uppercase">
+                <a href="#projects" class="hover:text-architectural-red transition-colors">Projects</a>
+                <a href="#experience" class="hover:text-architectural-red transition-colors">Experience</a>
+                <a href="#contact" class="hover:text-architectural-red transition-colors">Contact</a>
+            </div>
+            <div class="text-[10px] font-bold tracking-widest uppercase">E+C</div>
+        </nav>
+    </header>
+
+    <main class="pt-32 relative">
+        <!-- Hero Section -->
+        <section id="hero" class="max-w-7xl mx-auto px-6 mb-32 min-h-[70vh] flex flex-col justify-center relative">
+            <div class="mb-4 reveal">
+                <span class="text-[10px] font-bold tracking-[0.2em] text-architectural-red uppercase">Remote Operations Specialist</span>
+            </div>
+            <h1 id="hero-title" class="text-6xl md:text-8xl font-tight font-extrabold tracking-tight mb-8 leading-[0.9]">
+                <!-- Will be populated by JS for animation -->
+            </h1>
+            <p class="reveal text-2xl md:text-3xl font-medium text-architectural-text max-w-2xl mb-6 leading-tight">
+                I build structured systems for remote teams — from chaos to clarity.
+            </p>
+            <p class="reveal text-sm text-architectural-subtext max-w-xl mb-12 leading-relaxed">
+                Operations Specialist with 3+ years experience in workflow optimization, async collaboration, and documentation-driven execution.
+            </p>
+            <div class="reveal flex flex-wrap gap-4 mb-16">
+                <button class="btn-hover bg-architectural-red text-white text-[10px] font-bold tracking-widest uppercase px-10 py-4 hover:bg-black">
+                    View Projects
+                </button>
+                <a href="assets/Aisha_Bello_Remote_Operations_CV.docx" download="My_CV.pdf" class="inline-block">
+                    <button class="btn-hover border border-architectural-light text-architectural-text text-[10px] font-bold tracking-widest uppercase px-10 py-4 hover:bg-architectural-light">
+                    Download CV
+                </button>
+                </a>
+                
+            </div>
+            <div class="reveal flex flex-wrap gap-2">
+                <span class="bg-architectural-light text-[10px] font-bold tracking-widest uppercase px-3 py-1">Remote Ops</span>
+                <span class="bg-architectural-light text-[10px] font-bold tracking-widest uppercase px-3 py-1">Notion Systems</span>
+                <span class="bg-architectural-light text-[10px] font-bold tracking-widest uppercase px-3 py-1">Async Workflows</span>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator hidden md:block"></div>
+        </section>
+
+        <!-- The Operator Section -->
+        <section class="bg-architectural-light py-24 mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
+                    <div>
+                        <h2 class="reveal text-3xl font-tight font-extrabold tracking-tight mb-8 uppercase">The Operator.</h2>
+                        <p class="reveal text-sm text-architectural-subtext leading-relaxed">
+                            With a foundation in high-stakes retail operations, I transitioned to the remote landscape to solve the friction of distributed teams. I believe that clarity is the ultimate competitive advantage, and I deliver it through rigid architectural documentation and automated operational flows.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="reveal metric-card">
+                            <div class="text-4xl font-tight font-extrabold tracking-tighter mb-2">98%</div>
+                            <div class="text-[9px] font-bold tracking-widest uppercase text-architectural-subtext">Inventory Availability Managed</div>
+                        </div>
+                        <div class="reveal metric-card">
+                            <div class="text-4xl font-tight font-extrabold tracking-tighter mb-2">40%</div>
+                            <div class="text-[9px] font-bold tracking-widest uppercase text-architectural-subtext">Workflow Efficiency Improvement</div>
+                        </div>
+                        <div class="reveal metric-card">
+                            <div class="text-4xl font-tight font-extrabold tracking-tighter mb-2">0</div>
+                            <div class="text-[9px] font-bold tracking-widest uppercase text-architectural-subtext">Data Discrepancies Across Audits</div>
+                        </div>
+                        <div class="reveal metric-card">
+                            <div class="text-4xl font-tight font-extrabold tracking-tighter mb-2">8 Days</div>
+                            <div class="text-[9px] font-bold tracking-widest uppercase text-architectural-subtext">Reduced Onboarding from 2 Weeks</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects -->
+        <section id="projects" class="max-w-7xl mx-auto px-6 mb-32">
+            <h2 class="reveal text-3xl font-tight font-extrabold tracking-tight mb-12 uppercase border-b border-architectural-light pb-4">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <a href="project1.html" class="block group"> <!-- Wrapper start -->
+                <div class="project-card reveal bg-architectural-light p-8 cursor-pointer group transition-all duration-500">
+                    <div class="aspect-video bg-[#eae7e7] mb-8 overflow-hidden relative">
+                        <img src="assets/onboarding-dashboard.png" alt="Client Onboarding Wiki" class="w-full h-full object-cover object-left-top opacity-80 zoom-image">
+                        <div class="absolute top-4 left-4 text-[7px] font-bold tracking-widest uppercase text-architectural-subtext bg-white/50 px-2 py-1 z-10">SYS_ONBOARDING_V.02</div>
+                    </div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 transition-colors">Client Onboarding Wiki (Notion)</h3>
+                    <p class="text-xs text-architectural-subtext mb-8 leading-relaxed">A structured onboarding system for async teams with SOPs, templates, and check-ins.</p>
+                    <div class="text-[9px] font-bold tracking-widest uppercase text-architectural-red">View Case Study →</div>
+                </div>
+                </a>
+                <!-- Project 2 -->
+                <a href="project2.html" class="block group"> <!-- Wrapper start -->
+                <div class="project-card reveal bg-architectural-light p-8 cursor-pointer group transition-all duration-500">
+                    <div class="aspect-video bg-[#eae7e7] mb-8 overflow-hidden relative">
+                        <img src="assets/operations-tracker.png" alt="Operations Tracker Dashboard" class="w-full h-full object-cover object-[20%_10%] opacity-80 zoom-image">
+                        <div class="absolute top-4 left-4 text-[7px] font-bold tracking-widest uppercase text-architectural-subtext bg-white/50 px-2 py-1 z-10">OPS_TRACKER_LDR</div>
+                    </div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 transition-colors">Operations Tracker Dashboard (Google Sheets)</h3>
+                    <p class="text-xs text-architectural-subtext mb-8 leading-relaxed">Weekly operations tracking system with automated reporting and status visibility.</p>
+                    <div class="text-[9px] font-bold tracking-widest uppercase text-architectural-red">View Case Study →</div>
+                </div>
+                </a>
+                <!-- Project 3 -->
+                <a href="project3.html" class="block group"> <!-- Wrapper start --> 
+                <div class="project-card reveal bg-architectural-light p-8 cursor-pointer group transition-all duration-500">
+                    <div class="aspect-video bg-[#eae7e7] mb-8 overflow-hidden relative">
+                        <img src="assets/content-calendar.webp" alt="Content Scheduling System" class="w-full h-full object-cover object-[center_20%] opacity-80 zoom-image">
+                        <div class="absolute top-4 left-4 text-[7px] font-bold tracking-widest uppercase text-architectural-subtext bg-white/50 px-2 py-1 z-10">CONTENT_FLW_MGR</div>
+                    </div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 transition-colors">Content Scheduling System (Notion)</h3>
+                    <p class="text-xs text-architectural-subtext mb-8 leading-relaxed">Async content workflow for consistent weekly publishing.</p>
+                    <div class="text-[9px] font-bold tracking-widest uppercase text-architectural-red">View Case Study →</div>
+                </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Core Systems -->
+        <section class="max-w-7xl mx-auto px-6 mb-32">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-architectural-light pt-12 border-t border-architectural-light">
+                <div class="reveal spec-block">
+                    <div class="text-[9px] font-bold tracking-[0.2em] text-architectural-subtext uppercase mb-2">Technical Specs</div>
+                    <h3 class="text-2xl font-tight font-extrabold tracking-tight uppercase">Core Systems</h3>
+                </div>
+                <div class="reveal spec-block">
+                    <div class="text-[10px] font-bold tracking-widest uppercase mb-6">Operations Systems</div>
+                    <ul class="text-[11px] space-y-3 text-architectural-subtext uppercase tracking-wider">
+                        <li><span class="square-bullet"></span>SOP Design</li>
+                        <li><span class="square-bullet"></span>Inventory Tracking</li>
+                        <li><span class="square-bullet"></span>Process Mapping</li>
+                    </ul>
+                </div>
+                <div class="reveal spec-block">
+                    <div class="text-[10px] font-bold tracking-widest uppercase mb-6">Communication</div>
+                    <ul class="text-[11px] space-y-3 text-architectural-subtext uppercase tracking-wider">
+                        <li><span class="square-bullet"></span>Async Frameworks</li>
+                        <li><span class="square-bullet"></span>Slack Architecture</li>
+                        <li><span class="square-bullet"></span>Internal Reporting</li>
+                    </ul>
+                </div>
+                <div class="reveal spec-block">
+                    <div class="text-[10px] font-bold tracking-widest uppercase mb-6">Tools & Platforms</div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-token">Notion</span>
+                        <span class="tool-token">Google Workspace</span>
+                        <span class="tool-token">Trello</span>
+                        <span class="tool-token">Slack</span>
+                        <span class="tool-token">Asana</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logs / Timeline -->
+        <section id="experience" class="max-w-7xl mx-auto px-6 mb-32">
+            <h2 class="reveal text-3xl font-tight font-extrabold tracking-tight mb-16 uppercase">Logs / Timeline</h2>
+            <div class="space-y-12 timeline-guide pl-8">
+                <div class="reveal log-item grid grid-cols-1 md:grid-cols-4 gap-8 items-start relative">
+                    <div class="timeline-marker"></div>
+                    <div class="text-[10px] font-bold tracking-widest text-architectural-red uppercase">2022 — PRES.</div>
+                    <div class="md:col-span-3">
+                        <h3 class="text-sm font-bold tracking-widest uppercase mb-2">Freelance Remote Work</h3>
+                        <div class="text-[9px] font-bold tracking-widest uppercase text-architectural-subtext mb-4">Remote Operations Specialist</div>
+                        <p class="text-xs text-architectural-subtext leading-relaxed max-w-2xl">
+                            Managing complex workflow architectures for remote startups, focusing on tool-stack consolidation and SOP creation.
+                        </p>
+                    </div>
+                </div>
+                <div class="reveal log-item grid grid-cols-1 md:grid-cols-4 gap-8 items-start relative">
+                    <div class="timeline-marker"></div>
+                    <div class="text-[10px] font-bold tracking-widest text-architectural-red uppercase">2019 — 2021</div>
+                    <div class="md:col-span-3">
+                        <h3 class="text-sm font-bold tracking-widest uppercase mb-2">Freshmart Superstore</h3>
+                        <div class="text-[9px] font-bold tracking-widest uppercase text-architectural-subtext mb-4">Store Operations Lead</div>
+                        <p class="text-xs text-architectural-subtext leading-relaxed max-w-2xl">
+                            Supervised and for and inventory management and floor operations, achieving record-breaking efficiency metrics and audit scores.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Red Metrics Strip -->
+        <section class="bg-architectural-red text-white py-24 mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="reveal metric-card-white">
+                        <div class="text-5xl font-tight font-extrabold tracking-tighter mb-2">+40%</div>
+                        <div class="text-[9px] font-bold tracking-widest uppercase opacity-80">Async Task Completion Improvement</div>
+                    </div>
+                    <div class="reveal metric-card-white">
+                        <div class="text-5xl font-tight font-extrabold tracking-tighter mb-2">-2.5 WK</div>
+                        <div class="text-[9px] font-bold tracking-widest uppercase opacity-80">Onboarding Time Reduction</div>
+                    </div>
+                    <div class="reveal metric-card-white">
+                        <div class="text-5xl font-tight font-extrabold tracking-tighter mb-2">98%</div>
+                        <div class="text-[9px] font-bold tracking-widest uppercase opacity-80">Inventory Availability</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contact" class="max-w-7xl mx-auto px-6 mb-32 flex flex-col items-center text-center">
+            <div class="max-w-3xl">
+                <h2 class="reveal text-5xl md:text-7xl font-tight font-extrabold tracking-tight mb-12 uppercase leading-[0.9]">
+                    Let’s build your operations system.
+                </h2>
+                <div class="reveal flex flex-wrap gap-4 justify-center">
+                    <button class="btn-hover bg-architectural-red text-white text-[10px] font-bold tracking-widest uppercase px-12 py-5 hover:bg-black">
+                        Contact Me
+                    </button>
+                    <button class="btn-hover border border-architectural-light text-architectural-text text-[10px] font-bold tracking-widest uppercase px-12 py-5 hover:bg-architectural-light">
+                        View LinkedIn
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-6 py-12 border-t border-architectural-light">
+        <div class="flex flex-col md:flex-row gap-8 justify-between items-center text-[9px] font-bold tracking-widest uppercase text-architectural-subtext">
+            <div>©2024 Architectural Ledger. All Rights Reserved.</div>
+            <div class="flex gap-8">
+                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-green-500"></span> System_Active</span>
+                <a href="#" class="hover:text-architectural-text transition-colors">Logs</a>
+                <a href="#" class="hover:text-architectural-text transition-colors">Legal</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
